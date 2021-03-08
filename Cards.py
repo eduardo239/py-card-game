@@ -3,9 +3,6 @@ import random
 
 class Card:
     def __init__(self):
-        self.name = ''
-        self.attack = ''
-        self.defense = ''
         self.deck = []
         self.deck_type = []
         self.deck_type_string = []
@@ -27,10 +24,10 @@ class Card:
             d = int(random.randint(1, 3))
             self.deck_type.append(d)
         for x in range(1, 6):
-            e = int(random.randint(1, 11))
+            e = int(random.randint(1, 10))
             self.deck_attack.append(e)
         for y in range(1, 6):
-            f = int(random.randint(1, 11))
+            f = int(random.randint(1, 10))
             self.deck_defense.append(f)
 
         self.get_type(self.deck_type)

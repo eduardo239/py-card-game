@@ -1,5 +1,4 @@
 from Cards import Card
-from random import randint
 
 
 class Player(Card):
