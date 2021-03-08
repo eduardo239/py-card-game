@@ -1,0 +1,8 @@
+colorama==0.4.4
+numpy==1.20.1
+pyfiglet==0.8.post1
+PyQt5==5.15.3
+PyQt5-Qt==5.15.2
+PyQt5-sip==12.8.1
+tabulate==0.8.9
+termcolor==1.1.0
