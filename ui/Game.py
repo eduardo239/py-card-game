@@ -2,10 +2,13 @@ import random
 from card import CARD, NULL
 from style import *
 from PyQt5 import QtCore, QtGui, QtWidgets
-from ui import Players_Name
+from ui import Players_Name, Player
 
 
 class Ui_MainWindow(object):
+    def __init__(self):
+        pass
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(824, 663)
@@ -305,6 +308,8 @@ class Ui_MainWindow(object):
         self.p1_score = 0
         self.p2_score = 0
 
+        """ player name """
+
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -417,11 +422,23 @@ class Ui_MainWindow(object):
 
     """pick the card"""
 
-    def pick(self, card, enemy):
+    def pick(self, card, pos):
+
         """ reset p2 card in the battle """
         r2 = QtGui.QIcon()
         r2.addPixmap(QtGui.QPixmap(NULL[0]['image']), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.card_p2.setIcon(r2)
+
+        """ hide card from p1 deck """
+        i3 = QtGui.QIcon()
+        i3.addPixmap(QtGui.QPixmap(NULL[0]['image']), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+
+        '''FIX ME'''
+        # if pos == 0: self.card_1.setIcon(i3)
+        # if pos == 1: self.card_2.setIcon(i3)
+        # if pos == 2: self.card_3.setIcon(i3)
+        # if pos == 3: self.card_4.setIcon(i3)
+        # if pos == 4: self.card_5.setIcon(i3)
 
         """ send cards to fight battle """
         self.card_p1_battle = card
@@ -430,10 +447,9 @@ class Ui_MainWindow(object):
         p1_atk = card['attack']
         p1_def = card['defense']
         p1_elm = card['element']
-        p1_elm_points = self.get_element_points(p1_elm)
-        p1_total = p1_atk + p1_def + p1_elm_points
-        """ set total points from the player 1 """
-        self.player_1_total = p1_total
+        # p1_elm_points = self.get_element_points(p1_elm)
+
+
 
         i = QtGui.QIcon()
         i.addPixmap(QtGui.QPixmap(card['image']), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -442,14 +458,37 @@ class Ui_MainWindow(object):
         self.lbl_p1_vantagem.setText(card['element'])
 
         """ p2 show stats in the label """
-        p2_atk = self.deck_p2[enemy]['attack']
-        p2_def = self.deck_p2[enemy]['defense']
-        p2_elm = self.deck_p2[enemy]['element']
-        p2_elm_points = self.get_element_points(p2_elm)
+        p2_atk = self.deck_p2[pos]['attack']
+        p2_def = self.deck_p2[pos]['defense']
+        p2_elm = self.deck_p2[pos]['element']
+        # p2_elm_points = self.get_element_points(p2_elm)
+
+        """ element advantage """
+        p1_elm_points = 0
+        p2_elm_points = 0
+        if p2_elm == 'fire' and p1_elm == 'nature':
+            p2_elm_points = 2
+        elif p2_elm == 'nature' and p1_elm == 'water':
+            p2_elm_points = 2
+        elif p2_elm == 'water' and p1_elm == 'fire':
+            p2_elm_points = 2
+
+        if p1_elm == 'fire' and p2_elm == 'nature':
+            p1_elm_points = 2
+        elif p1_elm == 'nature' and p2_elm == 'water':
+            p1_elm_points = 2
+        elif p1_elm == 'water' and p2_elm == 'fire':
+            p1_elm_points = 2
+
+        """ total """
+        p1_total = p1_atk + p1_def + p1_elm_points
         p2_total = p2_atk + p2_def + p2_elm_points
 
+        """ set total points from the player 1 """
+        self.player_1_total = p1_total
+
         # set p2 card picked
-        self.player_2_pick = self.deck_p2[enemy]
+        self.player_2_pick = self.deck_p2[pos]
 
         """ set total points from the player 2 """
         self.player_2_total = p2_total
@@ -485,6 +524,7 @@ class Ui_MainWindow(object):
             return 0
 
     """ players name window """
+
     def w_players_name(self):
         self.window = QtWidgets.QMainWindow()
         self.ui = Players_Name.Ui_MainWindow()
