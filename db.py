@@ -38,17 +38,17 @@ def insert_result(data):
     try:
         q = QSqlQuery()
         q.exec_(sql)
-        print(sql)
+        # print(sql)
 
-        query_all = """SELECT winner FROM games;"""
-        qa = QSqlQuery()
-        qa.exec_(query_all)
-
-        if qa.first():
-            print(qa.value(0))
-        else:
-            print('nada')
-        print(query_all)
+        # query_all = """SELECT winner FROM games;"""
+        # qa = QSqlQuery()
+        # qa.exec_(query_all)
+        #
+        # if qa.first():
+        #     print(qa.value(0))
+        # else:
+        #     print('Erro ao buscar o vencedor')
+        # print(query_all)
     except QSqlError:
         print(QSqlError)
         return

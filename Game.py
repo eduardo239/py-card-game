@@ -1,4 +1,3 @@
-import random
 from time import sleep
 
 from db import insert_result
@@ -76,29 +75,27 @@ class Game:
         self.battle_message(data)
 
         if p1_atk > p2_atk:
-            msg_status('Player 1 Venceu essa luta')
+            msg_status('Player 1 won this fight.')
             self.player1.score += 1
             if self.player1.score == FINAL_SCORE:
                 self.win_message(self.player1.name)
 
         elif p2_atk > p1_atk:
-            msg_status('Player 2 Venceu essa luta')
+            msg_status('Player 2 won this fight.')
             self.player2.score += 1
             if self.player2.score == FINAL_SCORE:
                 self.win_message(self.player2.name)
 
         else:
-            print('Draw')
+            msg_status('Draw !')
             self.player1.score += 1
             self.player2.score += 1
-            msg_status('Empate !')
 
             if self.player1.score == FINAL_SCORE:
                 self.win_message(self.player1.name)
 
             if self.player2.score == FINAL_SCORE:
                 self.win_message(self.player2.name)
-
 
         print('- ' * 20)
         print(f'PLAYER {self.player1.name}: {self.player1.score}'
@@ -114,13 +111,13 @@ class Game:
         sleep(0.75)
         print(' .-. ' * 10)
         sleep(0.75)
-        msg_success('Fim de jogo')
+        msg_success('Game Over')
         sleep(0.75)
         print(' .-. ' * 10)
         sleep(0.75)
-        msg_win(f'{player} VENCEU!')
+        msg_win(f'{player} WON!')
         sleep(0.75)
-        msg_success(f'Placar FINAL: {self.player1.score} x {self.player2.score}')
+        msg_success(f'Final Score: {self.player1.score} x {self.player2.score}')
         sleep(0.75)
 
         data = {
