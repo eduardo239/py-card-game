@@ -21,7 +21,7 @@ def connection():
         sys.exit(1)
 
     if con.isOpen():
-        print('Connected.')
+        # print('Connected.')
         return con
 
 
@@ -62,3 +62,4 @@ sql1 = f"""CREATE TABLE IF NOT EXISTS games (
         final_score VARCHAR(10),
         date VARCHAR(46)
         )"""
+
