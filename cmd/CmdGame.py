@@ -1,4 +1,6 @@
 import time
+import random
+from db.cmd_sql import insert_result
 from tabulate import tabulate
 from termcolor import cprint
 from pyfiglet import Figlet
@@ -36,6 +38,7 @@ class Game:
         self.deck_1 = self.player1.get_deck()
         self.deck_2 = self.player2.get_deck()
         self.play = True
+        self.winner = ''
 
     def start(self):
         # game count
@@ -75,36 +78,37 @@ class Game:
 
     def pick(self, p1_pick, p2_pick):
         # check if the card has already been played
-        if self.played_cards_1[p1_pick - 1]:
+        if self.played_cards_1[p1_pick - 1] or self.played_cards_2[p2_pick - 1]:
             return print_error('Card already played!')
+        else:
 
-        # set true for card played
-        self.played_cards_1[p1_pick - 1] = True
-        self.played_cards_2[p2_pick - 1] = True
+            # set true for card played
+            self.played_cards_1[p1_pick - 1] = True
+            self.played_cards_2[p2_pick - 1] = True
 
-        # p1 stats
-        p1_atk = int(self.deck_1[p1_pick - 1][0])
-        p1_def = int(self.deck_1[p1_pick - 1][1])
-        p1_elm = self.deck_1[p1_pick - 1][2]
+            # p1 stats
+            p1_atk = int(self.deck_1[p1_pick - 1][0])
+            p1_def = int(self.deck_1[p1_pick - 1][1])
+            p1_elm = self.deck_1[p1_pick - 1][2]
 
-        # p2 stats
-        p2_atk = int(self.deck_2[p2_pick - 1][0])
-        p2_def = int(self.deck_2[p2_pick - 1][1])
-        p2_elm = self.deck_2[p2_pick - 1][2]
+            # p2 stats
+            p2_atk = int(self.deck_2[p2_pick - 1][0])
+            p2_def = int(self.deck_2[p2_pick - 1][1])
+            p2_elm = self.deck_2[p2_pick - 1][2]
 
-        p1_total = {
-            'attack': p1_atk,
-            'defense': p1_def,
-            'element': p1_elm
-        }
-        p2_total = {
-            'attack': p2_atk,
-            'defense': p2_def,
-            'element': p2_elm
-        }
+            p1_total = {
+                'attack': p1_atk,
+                'defense': p1_def,
+                'element': p1_elm
+            }
+            p2_total = {
+                'attack': p2_atk,
+                'defense': p2_def,
+                'element': p2_elm
+            }
 
-        # call the method
-        self.match(p1_total, p2_total)
+            # call the method
+            self.match(p1_total, p2_total)
 
     def element(self, p1_el, p2_el):
         # check element advantage
@@ -130,8 +134,8 @@ class Game:
         f2 = 0
         # decide which element wins
         adv = self.element(e1, e2)
-        f1 += 2 if adv == 'p1' else 0
-        f2 += 2 if adv == 'p2' else 0
+        f1 += random.randint(2, 5) if adv == 'p1' else 0
+        f2 += random.randint(2, 5) if adv == 'p2' else 0
 
         # total players stats
         p1_sum = a1 - d2 + f1
@@ -158,14 +162,31 @@ class Game:
         if self.score_p1 == 3 or self.score_p2 == 3:
             self.play = False
             time.sleep(1)
-            print_win(f.renderText('The Player:'))
+            print_win(f.renderText('Player'))
             time.sleep(1)
+
             if self.score_p1 == 3 and self.score_p2 == 3:
                 print_win(f.renderText('DRAW'))
+                # set winner
+                self.winner = 'Draw'
             elif self.score_p1 == 3:
                 print_win(f.renderText(self.player1.name))
+                # set winner
+                self.winner = self.player1.name
             elif self.score_p2 == 3:
                 print_win(f.renderText(self.player2.name))
+                # set winner
+                self.winner = self.player2.name
             time.sleep(1)
             print_win(f.renderText('Won'))
             time.sleep(1)
+
+            # save on db
+            score = f'{self.score_p1} x {self.score_p2}'
+            data = {
+                'player_1': self.player1.name,
+                'player_2': self.player2.name,
+                'winner': self.winner,
+                'final_score': score
+            }
+            insert_result(data)

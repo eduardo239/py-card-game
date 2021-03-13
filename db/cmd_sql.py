@@ -21,7 +21,7 @@ def connection():
         sys.exit(1)
 
     if con.isOpen():
-        # print('Connected.')
+        print('Connected.')
         return con
 
 

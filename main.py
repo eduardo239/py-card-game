@@ -1,25 +1,20 @@
 from PyQt5 import QtWidgets
 from db.cmd_sql import connection
-import os
+from cmd.CmdPlayer import Player
+from cmd.CmdGame import Game
 
 options = [1, 2, 0]
 
 connection()
 
-
-
-
-
-
-from cmd.CmdCard import Card
-from cmd.CmdPlayer import Player
-from cmd.CmdGame import Game
+#
 
 p1 = Player('Ivy')
 p2 = Player('Ema')
 
 g1 = Game(p1, p2)
 g1.start()
+
 
 def play():
     option = 1
@@ -46,6 +41,8 @@ def play():
 
         except ValueError as ve:
             print(f'[Error]: Invalid Character, {ve}')
+        except KeyError as ke:
+            print(f'[Error]: Invalid Character, {ke}')
 
 
 if __name__ == "__main__":
