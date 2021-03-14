@@ -2,10 +2,11 @@ from PyQt5 import QtWidgets
 from db.cmd_sql import connection, select_all
 from cmd.CmdPlayer import Player
 from cmd.CmdGame import Game
+from ui import GuiGame
 from tabulate import tabulate
 
 
-options = [1, 2, 0]
+options = [1, 2, 7, 8, 9, 0]
 connection()
 
 
@@ -14,15 +15,19 @@ def view_winners():
     print(tabulate(w, headers=["Played 1", "Player 2", "Winner", "Score"], tablefmt="psql"))
 
 
+def view_winners_gui():
+    print('nothing here')
+
+
 def play():
     option = 1
 
     while option != 0:
         print('- ' * 50)
-        print('[1] Play Command Line Game')
-        print('[2] Play User Interface Game')
-        print('[7] View Winners')
-        print('[8]')
+        print('[1] Play Command Line')
+        print('[2] Play Graphical User Game')
+        print('[7] View Winners (Command Line)')
+        print('[8] View Winners (Graphical User Interface)')
         print('[9] Rules')
         print('[0] Exit')
 
@@ -39,11 +44,22 @@ def play():
 
             """ gui game """
             if option == 2:
-                print('[2]')
+
+                import sys
+                app = QtWidgets.QApplication(sys.argv)
+                MainWindow = QtWidgets.QMainWindow()
+                ui = GuiGame.Ui_MainWindow()
+                ui.setupUi(MainWindow)
+                MainWindow.show()
+                sys.exit(app.exec_())
 
             """ cmd line winners"""
             if option == 7:
                 view_winners()
+
+            """ cmd line winners"""
+            if option == 8:
+                view_winners_gui()
 
             """ rules """
             if option == 9:

@@ -65,9 +65,9 @@ class Game:
                 self.pick(p1_pick, p2_pick)
 
                 # show score and played cards table
-                table = [["SCORE", self.score_p1, self.score_p2]]
+                table = [["Player 1", self.score_p1, "Player 2", self.score_p2]]
                 played_cards = [["Player 1", self.played_cards_1], ["Player 2", self.played_cards_2]]
-                print_warning(tabulate(table, headers=["Player 1", "Player 2"], tablefmt="psql"))
+                print_warning(tabulate(table,  tablefmt="psql"))
                 print(tabulate(played_cards, headers=["Played Cards"], tablefmt="psql"))
 
                 counter += 1

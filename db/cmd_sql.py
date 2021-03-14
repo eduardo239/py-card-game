@@ -66,6 +66,7 @@ def select_all():
             winners.append([q.value(0), q.value(1), q.value(2), q.value(3)])
         return winners
 
+
 sql1 = f"""CREATE TABLE IF NOT EXISTS games (
         id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,
         player_1 VARCHAR(46) NOT NULL,
