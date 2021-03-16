@@ -481,13 +481,11 @@ class Ui_MainWindow(object):
         self.lbl_my_result.setText(str(f'Result: {sum1}'))
 
         # sum of stats p2 fake pick
-        print(self.deck_p2_picked)
         self.deck_p2_picked = self.deck_p2_new_dict[f'card{pick}']
         bb1 = int(self.deck_p2_picked['attack'])
         bb2 = int(self.deck_p2_picked['defense'])
         bb3 = self.deck_p2_picked['element']
         sum2 = bb1 + bb2
-        print(sum2)
 
     def start(self, p1, p2):
         # remove arguments
@@ -534,6 +532,11 @@ class Ui_MainWindow(object):
         self.lbl_enemy_attack.setText(str(f'Attack: {self.en_attack}'))
         self.lbl_enemy_defense.setText(str(f'Defense: {self.en_defense}'))
         self.lbl_enemy_element.setText(str(f'Element: {self.en_element}'))
+
+        # show opponent stats
+        self.lbl_enemy_attack.setText(str(f'Attack: {self.deck_p2_picked["attack"]}'))
+        self.lbl_enemy_defense.setText(str(f'Defense: {self.deck_p2_picked["defense"]}'))
+        self.lbl_enemy_element.setText(str(f'Element: {self.deck_p2_picked ["element"]}'))
 
         # check if someone win
         if a > b:
