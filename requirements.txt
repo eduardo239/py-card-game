@@ -1,5 +1,6 @@
 colorama==0.4.4
 numpy==1.20.1
+Pillow==8.1.2
 pyfiglet==0.8.post1
 PyQt5==5.15.3
 PyQt5-Qt==5.15.2
