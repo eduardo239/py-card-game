@@ -1,46 +1,76 @@
 primary = '#1F2C41'
-white = '#ffffff'
+white = '#ffffea'
 dark = '#2c2c2c'
-light_grey = '#ddd'
+light_grey = '#dfdfdf'
 green = 'green'
+grey = '#1f1f1f'
+blue_ = '#00cecb'
+pink = '#ff5e5b'
+yellow = '#ffed66'
 
-group_box = f"""padding: 0;"""
+# new
+btn_primary = f"""padding: 5px 16px;
+  color: #1c1c1c;
+  background: #ffed66;
+  border: none;"""
 
-lbl_simple = f"""
-  font-size: 12pt;
-  color: {dark};
-  letter-spacing: 1px;"""
+btn_secondary = f"""padding: 5px 16px;
+  color: #ffffea;
+  background: #ff5e5b;
+  border: none;"""
 
-lbl_fight_stats = f"""color: {dark}; padding: 5px;"""
+btn_secondary_big = f"""
+  padding: 6px 36px;
+  color: #ffffea;
+  background: #ff5e5b;
+  border: none;
+  font-size: 14pt;"""
 
-# btn
-btn_dark = f"""
-  background-color: #141414;
-  color: #eef0f2;
-  border: 0;
-  padding: 8px 16px;
-  font-style: uppercase;
-  letter-spacing: 1px;"""
-
-btn_secondary = f"""background-color: #ffffff;
-  color: #011638;
-  border: 0;
-  padding: 8px 16px;
-  font-style: uppercase;
-  letter-spacing: 1px;
+main_window = """
+QMainWindow{background-color: #fff;border: 1px solid black;}
 """
-lbl_winner = f"""font-size: 27pt; font-weight: bold; color: {green}"""
-lbl_score = f"""font-size: 27pt; color: {dark}"""
-lbl_stats = f"""font-size: 12pt; border: 1px solid {light_grey}; 
-background-color: transparent; padding: 5px 10px; background-color: {white}"""
-lbl_player_score = f"""font-size: 16pt; padding: 5px 10px;
-background-color: transparent; color: {primary}; border: 1px solid {light_grey}"""
 
-btn_primary = f"""background-color: #eec643;
-  color: #141414;
-  border: 0;
-  padding: 5px 15px;
-  font-style: uppercase;
-  letter-spacing: 1px;"""
+group_box = f"""padding: 0; margin:0; border: none;"""
 
-general = "QPushButton:pressed { background-color: red; border: 4px solid red; }"
+inp_disabled = f"""
+  padding: 2px 6px;
+  background: #ffffea;
+  color: #ff5e5b;
+  border: none;
+  font-size: 11pt;
+  font-weight: bold;"""
+
+inp_enable = f"""
+  padding: 2px 4px;
+  background: #ffffea;
+  color: #2b2b2b;
+  border: 1px solid #adadad;
+  font-size: 10pt;"""
+
+lbl_pink = f"""padding: 2px 10px;
+  color: #2b2b2b;
+  font-size: 15pt;
+  color: #ff5e5b;"""
+
+lbl_dark = f"""font-size: 11pt;
+  color: #2b2b2b;
+  padding: 2px 10px;"""
+
+lbl_big = f"""font-size: 24pt;
+  color: #2b2b2b;
+  padding: 2px 10px;
+  font-weight: bold;
+"""
+
+lbl_big_winner = f"""
+  font-size: 24pt;
+  color: #00cecb;
+  padding: 2px 10px;
+  font-weight: bold;
+"""
+
+min_width = f"""width: 140px;"""
+
+img_cards = f"""min-width: 280px; min-height: 132px;"""
+
+
